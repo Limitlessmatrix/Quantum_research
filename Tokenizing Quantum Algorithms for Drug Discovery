@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Drug Discovery: The Tokenization Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    Infographic Narrative & Structure Plan:
+    1.  Introduction/Hook: Hero section establishing the transformative potential of quantum computing for drug discovery, highlighting the 2022-2025 advancements.
+    2.  The Core Idea - Tokenization: A section explaining the modular "token" philosophy for algorithm design.
+    3.  The "Token" Library: A visual grid showcasing the key algorithmic primitives (Hamiltonian Simulation, Encodings, VQE/QAOA, Error Mitigation) identified in the source documents.
+    4.  Building with Tokens - The ADAPT-VQE Workflow: A flowchart illustrating how these tokens are combined in a real-world, adaptive algorithm.
+    5.  Efficiency in Action - Encoding Comparison: A bar chart visualizing the qubit savings from advanced encoding tokens like Bravyi-Kitaev and QEE.
+    6.  The Hybrid Workflow Breakdown: A donut chart showing the composition of a typical hybrid quantum-classical drug discovery algorithm.
+    7.  Real-World Breakthroughs (2025): A section highlighting the major pharmaceutical successes achieved using these tokenized, hybrid methods (St. Jude/KRAS, Pasqal/Protein Hydration, etc.).
+    8.  Conclusion: A forward-looking statement on how this modular strategy is shaping the future of pharmaceutical research.
+
+    Visualization Selection Plan:
+    -   ADAPT-VQE Workflow: Goal: Organize. Visualization: Flow Chart (HTML/CSS). Justification: Clearly shows the iterative, adaptive process of building an ansatz from a token pool. Confirmed NO SVG, NO MERMAID JS.
+    -   Encoding Efficiency Comparison: Goal: Compare. Visualization: Bar Chart (Chart.js). Justification: Directly compares the qubit requirements of different encoding "tokens" for specific molecules (H2, LiH), using data from the documents. Confirmed NO SVG.
+    -   Hybrid Workflow Composition: Goal: Compare (Composition). Visualization: Donut Chart (Chart.js). Justification: Shows the conceptual breakdown of a hybrid algorithm into its key components (Ansatz, Optimizer, Error Mitigation), reflecting their importance. Confirmed NO SVG.
+    -   "Token" Library: Goal: Organize. Visualization: Card Grid (HTML/CSS). Justification: Presents the modular components in a digestible, modern format. Confirmed NO SVG.
+    
+    Color Palette Selection:
+    -   Chosen Palette: "Energetic & Playful" (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C) for a vibrant, high-contrast, and modern feel suitable for a cutting-edge topic.
+    
+    NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #073B4C; /* Dark Blue */
+            color: #FFFFFF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #FFD166, #06D6A0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flow-arrow {
+            position: relative;
+            color: #118AB2; /* Medium Blue */
+        }
+        .flow-arrow::after {
+            content: '►';
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #FFD166; /* Yellow */
+        }
+        .flow-card {
+            background-color: #118AB2; /* Medium Blue */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight">
+                <span class="gradient-text">The New Pharma Language:</span><br>Tokenizing Quantum Algorithms for Drug Discovery
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-300">
+                From 2022-2025, quantum computing shifted from theory to reality in drug discovery. The key? A modular, "plug-and-play" strategy that deconstructs complex algorithms into reusable "tokens," accelerating the path to novel therapeutics.
+            </p>
+        </header>
+
+        <main class="space-y-24">
+
+            <section id="tokens">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">The Algorithmic "Token" Library</h2>
+                    <p class="mt-2 max-w-2xl mx-auto text-gray-400">Innovation now comes from a standardized library of quantum primitives. These "tokens" are mixed and matched to build powerful, bespoke algorithms tailored to specific molecular challenges.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#06D6A0]">
+                        <h3 class="text-xl font-bold">Hamiltonian Simulation</h3>
+                        <p class="mt-2 text-sm text-gray-200">The core engine. Primitives like Trotterization and Qubitization simulate molecular behavior at the quantum level.</p>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#06D6A0]">
+                        <h3 class="text-xl font-bold">Encoding Tokens</h3>
+                        <p class="mt-2 text-sm text-gray-200">Map fermionic systems to qubits. Bravyi-Kitaev and the revolutionary Qubit-Efficient Encoding (QEE) dramatically reduce resource needs.</p>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#06D6A0]">
+                        <h3 class="text-xl font-bold">Variational Algorithms (VQE/QAOA)</h3>
+                        <p class="mt-2 text-sm text-gray-200">The workhorses of the NISQ era. Find molecular ground states and optimize complex problems like protein folding and molecular docking.</p>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#FFD166]">
+                        <h3 class="text-xl font-bold">Adaptive Ansätze (ADAPT-VQE)</h3>
+                        <p class="mt-2 text-sm text-gray-200">A "smart" token that builds circuits iteratively, creating compact, problem-specific ansätze with fewer parameters.</p>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#FFD166]">
+                        <h3 class="text-xl font-bold">Error Mitigation Tokens</h3>
+                        <p class="mt-2 text-sm text-gray-200">Combat hardware noise. Zero-Noise Extrapolation (ZNE) and Purification-based methods are crucial for achieving accuracy on today's devices.</p>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-xl shadow-2xl p-6 border-t-4 border-[#FFD166]">
+                        <h3 class="text-xl font-bold">Hybrid Integration Tokens</h3>
+                        <p class="mt-2 text-sm text-gray-200">The bridge to classical power. QM/MM interfaces and ML integration points create seamless classical-quantum workflows.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="adapt-vqe">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">Building with Tokens: The ADAPT-VQE Workflow</h2>
+                    <p class="mt-2 max-w-2xl mx-auto text-gray-400">Instead of fixed circuits, adaptive algorithms build them on the fly. ADAPT-VQE demonstrates the power of the token strategy, growing a custom circuit by selecting the most impactful "operator token" at each step.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-y-8 md:gap-x-8 items-center">
+                    <div class="flow-card flow-arrow">
+                        <h4 class="font-bold">1. Start</h4>
+                        <p class="text-sm text-gray-300">Begin with a simple initial state (e.g., Hartree-Fock).</p>
+                    </div>
+                    <div class="flow-card flow-arrow">
+                        <h4 class="font-bold">2. Define Pool</h4>
+                        <p class="text-sm text-gray-300">Create a library of available "operator tokens" (e.g., fermionic excitations).</p>
+                    </div>
+                    <div class="flow-card flow-arrow">
+                        <h4 class="font-bold">3. Select</h4>
+                        <p class="text-sm text-gray-300">Measure gradients. Select the token from the pool with the largest impact on energy.</p>
+                    </div>
+                    <div class="flow-card flow-arrow">
+                        <h4 class="font-bold">4. Add & Optimize</h4>
+                        <p class="text-sm text-gray-300">Add the selected token to the ansatz. Optimize all parameters with VQE.</p>
+                    </div>
+                    <div class="flow-card">
+                        <h4 class="font-bold">5. Repeat</h4>
+                        <p class="text-sm text-gray-300">Loop until energy converges, yielding a compact, highly accurate circuit.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="efficiency">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">Efficiency in Action: Advanced Encodings Reduce Qubit Overhead</h2>
+                    <p class="mt-2 max-w-2xl mx-auto text-gray-400">The choice of "encoding token" has a massive impact on resource requirements. The revolutionary Qubit-Efficient Encoding (QEE) enables simulations on today's hardware that were previously impossible.</p>
+                </div>
+                <div class="bg-[#118AB2] rounded-xl shadow-2xl p-4 md:p-8">
+                    <div class="chart-container">
+                        <canvas id="encodingChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="hybrid-breakdown">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">The Hybrid Workflow: A Symphony of Tokens</h2>
+                    <p class="mt-2 max-w-2xl mx-auto text-gray-400">A successful drug discovery application is a carefully orchestrated hybrid algorithm. The quantum processor handles the core simulation, while classical resources manage optimization, data processing, and error mitigation.</p>
+                </div>
+                <div class="bg-[#118AB2] rounded-xl shadow-2xl p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container" style="height: 300px; max-height: 350px;">
+                        <canvas id="workflowChart"></canvas>
+                    </div>
+                    <div class="text-gray-200">
+                        <h3 class="text-2xl font-bold mb-4">Key Components:</h3>
+                        <ul class="space-y-3">
+                            <li><strong class="text-[#FFD166]">Quantum Core (Ansatz):</strong> The heart of the calculation, preparing the molecular trial state. Its efficiency is paramount.</li>
+                            <li><strong class="text-[#06D6A0]">Classical Optimizer:</strong> The brain of the operation, navigating the complex energy landscape to find the optimal solution.</li>
+                            <li><strong class="text-[#FF6B6B]">Error Mitigation:</strong> The immune system, actively filtering out hardware noise to ensure the results are accurate and reliable.</li>
+                            <li><strong class="text-gray-300]">Data & Pre-processing:</strong> The foundation, preparing the problem (e.g., molecular geometry) for the hybrid workflow.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="breakthroughs">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">2025: From Theory to Validated Therapeutics</h2>
+                    <p class="mt-2 max-w-2xl mx-auto text-gray-400">The tokenization strategy is already yielding tangible results. Major collaborations have achieved experimentally validated breakthroughs on some of medicine's most challenging problems.</p>
+                </div>
+                <div class="space-y-8">
+                    <div class="p-6 bg-[#118AB2] rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-[#FFD166]">St. Jude & U. of Toronto Target "Undruggable" Cancer Protein</h3>
+                        <p class="mt-2 text-gray-200">The first landmark success. A hybrid quantum-classical ML model identified and experimentally validated two novel inhibitors for the KRAS protein, a notoriously difficult cancer target. This demonstrated a clear advantage over purely classical methods.</p>
+                    </div>
+                    <div class="p-6 bg-[#118AB2] rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-[#06D6A0]">Pasqal & Qubit Pharma Analyze Protein Hydration</h3>
+                        <p class="mt-2 text-gray-200">Using a neutral-atom quantum computer, this team implemented the first quantum algorithm for molecular biology, successfully analyzing protein hydration to address critical drug-protein binding mechanisms under realistic biological conditions.</p>
+                    </div>
+                    <div class="p-6 bg-[#118AB2] rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-[#FF6B6B]">Cleveland Clinic & IBM Enhance Protein Structure Prediction</h3>
+                        <p class="mt-2 text-gray-200">A new hybrid workflow outperformed both classical physics-based methods and AlphaFold2 for small protein fragments. The framework uses quantum algorithms for complex backbone modeling, followed by classical sidechain reconstruction.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-24 py-8 border-t border-gray-700">
+            <p class="text-gray-500">Infographic based on "Quantum Algorithm Innovation Strategy" and "Tokenizable Components of quantum algorithms".</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const energeticPalette = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            darkBlue: '#073B4C',
+            white: '#FFFFFF'
+        };
+
+        const chartTooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+        
+        const commonChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: energeticPalette.white,
+                        font: { size: 14 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: chartTooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const encodingCtx = document.getElementById('encodingChart').getContext('2d');
+        new Chart(encodingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['H₂ Molecule', 'LiH Molecule', 'Cyclohexane (Fragment)'],
+                datasets: [{
+                    label: 'Traditional Encoding (e.g., Jordan-Wigner)',
+                    data: [8, 12, 32],
+                    backgroundColor: energeticPalette.red,
+                    borderColor: energeticPalette.red,
+                    borderWidth: 1
+                }, {
+                    label: 'Advanced Encoding (Bravyi-Kitaev / QEE)',
+                    data: [4, 6, 27],
+                    backgroundColor: energeticPalette.green,
+                    borderColor: energeticPalette.green,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Required Qubits', color: energeticPalette.white },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: energeticPalette.white }
+                    },
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: energeticPalette.white, font: { size: 14 } }
+                    }
+                },
+                plugins: {
+                    ...commonChartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Qubit Requirements by Encoding Token',
+                        color: energeticPalette.white,
+                        font: { size: 18 }
+                    }
+                }
+            }
+        });
+
+        const workflowCtx = document.getElementById('workflowChart').getContext('2d');
+        new Chart(workflowCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Quantum Core (Ansatz)', 'Classical Optimizer', 'Error Mitigation', 'Data & Pre-processing'],
+                datasets: [{
+                    label: 'Workflow Component',
+                    data: [40, 25, 20, 15],
+                    backgroundColor: [
+                        energeticPalette.yellow,
+                        energeticPalette.green,
+                        energeticPalette.red,
+                        '#4B5563' // gray-600
+                    ],
+                    borderColor: energeticPalette.darkBlue,
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                plugins: {
+                     ...commonChartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Hybrid Workflow Composition',
+                        color: energeticPalette.white,
+                        font: { size: 18 }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
